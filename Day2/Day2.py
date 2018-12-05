@@ -1,6 +1,9 @@
 
 filepath = 'Data.txt'
 #filepath = 'DataTest.txt'
+#filepath = 'DataTest2.txt'
+
+boxIDsDictionary = {}
 
 with open(filepath) as fp:
 	cnt = 1
@@ -10,7 +13,7 @@ with open(filepath) as fp:
 		substring = ""
 		charDict = {}
 		foundDoubles = False; foundTriples = False
-
+		boxIDsDictionary.update({cnt:line.strip()})
 		
 		for char in line.strip():
 			if charDict.get(char, 0) == 0:
@@ -29,10 +32,33 @@ with open(filepath) as fp:
 		#print('Line {}: charDict = {}'.format(cnt, charDict))
 		cnt += 1
 	
-	print('Checksum Dictionary = {}'.format(checksumDict))
-	print('Final CheckSum = {}'.format(checksumDict[2] * checksumDict[3]))
-
+print('Checksum Dictionary = {}'.format(checksumDict))
+print('Final CheckSum = {}'.format(checksumDict[2] * checksumDict[3]))
 print('\n\n')
 
+cnt = 1
+correctBoxID = ''
+for boxID1 in boxIDsDictionary.items():
 
+	for boxID2 in boxIDsDictionary.items():
+		if correctBoxID != '':
+			break
 
+		if boxID1[0] == boxID2[0]:
+			continue
+
+		differCount = 0
+		for i in range(len(boxID1[1])):
+			if boxID1[1][i] != boxID2[1][i]:
+				differCount += 1
+			else:
+				correctBoxID += boxID1[1][i]
+
+		if differCount != 1:
+			correctBoxID = ''
+	
+	if correctBoxID != '':
+		break
+	cnt += 1
+
+print('The correct BoxID is: {}'.format(correctBoxID))
