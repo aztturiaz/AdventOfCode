@@ -55,7 +55,7 @@
 		width = abs(x2 - x1)
 		height = abs(y2 - y1)
 
-		print('W: {} - H: {}'.format(width, height))
+		#print('W: {} - H: {}'.format(width, height))
 
 		return width * height
 

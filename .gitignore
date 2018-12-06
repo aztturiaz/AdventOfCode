@@ -3,3 +3,6 @@ private/
 *.sqlite
 \bin
 \obj
+*.pyc
+
+\__pycache__
