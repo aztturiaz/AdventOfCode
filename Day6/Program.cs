@@ -47,12 +47,16 @@ namespace Day6
 
 			for (int x = minBoundary.X; x <= maxBoundary.X; x++)
 			{
-				for (int y = minBoundary.Y; y < maxBoundary.Y; y++)
+				for (int y = minBoundary.Y; y <= maxBoundary.Y; y++)
 				{
 					Point origin = new Point(x, y);
 					if (data.ContainsValue(origin))
 					{
 						matrix[x, y] = new Coordinate(origin, 0, data.FirstOrDefault(d => d.Value.Equals(origin)).Key * 10);
+						if (x == minBoundary.X || x == maxBoundary.X  || y == minBoundary.Y || y == maxBoundary.Y)
+						{
+							matrix[x, y].ExtendsToInfinty = true;
+						}
 						continue;
 					}
 					
@@ -79,6 +83,10 @@ namespace Day6
 						else
 						{
 							matrix[x, y] = new Coordinate(origin, manhattanDistance, destinyID);
+							if (x == minBoundary.X || x == maxBoundary.X || y == minBoundary.Y || y == maxBoundary.Y)
+							{
+								matrix[x, y].ExtendsToInfinty = true;
+							}
 						}
 					}
 				}
@@ -95,7 +103,14 @@ namespace Day6
 				{
 					if (matrix[j, i] != null)
 					{
-						s += string.Format("\t{0}", matrix[j, i].LocationID.ToString());
+						if (matrix[j, i].ExtendsToInfinty)
+						{
+							s += string.Format("\t{0}", "&");
+						}
+						else
+						{
+							s += string.Format("\t{0}", matrix[j, i].LocationID);
+						}						
 					}					
 				}
 				Console.WriteLine(s);
