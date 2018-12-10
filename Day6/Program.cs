@@ -41,6 +41,7 @@ namespace Day6
 
 			//Dictionary<Point, int> coordinates = new Dictionary<Point, int>();
 			Coordinate[,] matrix = new Coordinate[(maxBoundary.X + 1), (maxBoundary.Y + 1)];
+			List<Coordinate> coordsList = new List<Coordinate>();
 
 			// ========================================
 
@@ -52,11 +53,16 @@ namespace Day6
 					Point origin = new Point(x, y);
 					if (data.ContainsValue(origin))
 					{
-						matrix[x, y] = new Coordinate(origin, 0, data.FirstOrDefault(d => d.Value.Equals(origin)).Key * 10);
-						if (x == minBoundary.X || x == maxBoundary.X  || y == minBoundary.Y || y == maxBoundary.Y)
+						int originID = data.FirstOrDefault(d => d.Value.Equals(origin)).Key * 10;
+						//matrix[x, y] = new Coordinate(origin, 0, originID * 10);
+						matrix[x, y] = new Coordinate(origin, 0, originID);
+						coordsList.Add(matrix[x, y]);
+						if (x == minBoundary.X || x == maxBoundary.X  || y == minBoundary.Y || y == maxBoundary.Y 
+								)//|| coordsList.Where(c => c.LocationID == originID / 10 && c.ExtendsToInfinty).Any())
 						{
 							matrix[x, y].ExtendsToInfinty = true;
 						}
+						coordsList.Add(matrix[x, y]);
 						continue;
 					}
 					
@@ -83,11 +89,13 @@ namespace Day6
 						else
 						{
 							matrix[x, y] = new Coordinate(origin, manhattanDistance, destinyID);
-							if (x == minBoundary.X || x == maxBoundary.X || y == minBoundary.Y || y == maxBoundary.Y)
+							if (x == minBoundary.X || x == maxBoundary.X || y == minBoundary.Y || y == maxBoundary.Y
+									)//|| coordsList.Where(c => c.LocationID == destinyID && c.ExtendsToInfinty).Any())
 							{
 								matrix[x, y].ExtendsToInfinty = true;
 							}
 						}
+						coordsList.Add(matrix[x, y]);
 					}
 				}
 			}
@@ -103,17 +111,26 @@ namespace Day6
 				{
 					if (matrix[j, i] != null)
 					{
-						if (matrix[j, i].ExtendsToInfinty)
+						if (matrix[j, i].ExtendsToInfinty && matrix[j,i].LocationID > 0)
 						{
 							s += string.Format("\t{0}", "&");
 						}
 						else
 						{
-							s += string.Format("\t{0}", matrix[j, i].LocationID);
+							if (matrix[j, i].LocationID == -1)
+								s += string.Format("\t.");
+							else
+								s += string.Format("\t{0}", matrix[j, i].LocationID);
 						}						
 					}					
 				}
 				Console.WriteLine(s);
+			}
+
+			Console.WriteLine("\n");
+			foreach (var c in coordsList.Where(c => c != null && !c.ExtendsToInfinty))
+			{
+				Console.WriteLine(string.Format("Location ID: {0}", c.LocationID));
 			}
 
 			Console.ReadLine();
