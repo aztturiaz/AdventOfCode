@@ -24,5 +24,32 @@ namespace Day6
 			ExtendsToInfinty = false;
 		}
 
+		public static void PrintMap(Coordinate[,] matrix)
+		{
+			// Print matrix for TESTING
+			for (int i = 0; i < matrix.GetLength(1); i++)
+			{
+				string s = string.Empty;
+
+				for (int j = 0; j < matrix.GetLength(0); j++)
+				{
+					if (matrix[j, i] != null)
+					{
+						if (matrix[j, i].ExtendsToInfinty && matrix[j, i].LocationID > 0)
+						{
+							s += string.Format("\t{0}", "&");
+						}
+						else
+						{
+							if (matrix[j, i].LocationID == -1)
+								s += string.Format("\t.");
+							else
+								s += string.Format("\t{0}", matrix[j, i].LocationID);
+						}
+					}
+				}
+				Console.WriteLine(s);
+			}
+		}
     }
 }

@@ -72,5 +72,15 @@ namespace Day6
 			{ 5, new Point(5, 5) },
 			{ 6, new Point(8, 9) }
 		};
+
+		static public Dictionary<int, Point> testData2 = new Dictionary<int, Point>()
+		{
+			{ 1, new Point(1+20, 1+32) },
+			{ 2, new Point(1+20, 6+32) },
+			{ 3, new Point(8+20, 3+32) },
+			{ 4, new Point(3+20, 4+32) },
+			{ 5, new Point(5+20, 5+32) },
+			{ 6, new Point(8+20, 9+32) }
+		};
 	}
 }
