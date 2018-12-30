@@ -51,15 +51,6 @@ for key in guardsDictionary:
 
 print('\nGuard Id: {0} - Sleep Time: {1}'.format(guardId, highestSleepTime))
 
-mostFrequentMinute = 0
-minuteFrequency = 0
-for minute in guardsDictionary[guardId][1]:
-	if guardsDictionary[guardId][1][minute] > minuteFrequency:
-		minuteFrequency = guardsDictionary[guardId][1][minute]
-		mostFrequentMinute = minute
-
-print('{0} * {1} = {2}'.format(guardId, mostFrequentMinute, guardId * mostFrequentMinute))
-
 # Get the most frequent minute 
 mostFrequentMinute = 0
 minuteFrequency = 0
@@ -68,6 +59,10 @@ for minute in guardsDictionary[guardId][1]: # For each minute on the GuardId min
 	if guardsDictionary[guardId][1][minute] > minuteFrequency:
 		minuteFrequency = guardsDictionary[guardId][1][minute]
 		mostFrequentMinute = minute
+
+print('{0} * {1} = {2}'.format(guardId, mostFrequentMinute, guardId * mostFrequentMinute))
+
+
 
 
 print('\n')
