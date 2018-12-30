@@ -1,6 +1,6 @@
 from datetime import datetime
 filepath = 'Data.txt'
-filepath = 'DataTest.txt'
+#filepath = 'DataTest.txt'
 
 
 dataDict = {}
@@ -47,7 +47,6 @@ highestSleepTime = 0
 for key in guardsDictionary:
 	highestSleepTime = guardsDictionary[key][0] if guardsDictionary[key][0] > highestSleepTime else highestSleepTime
 	guardId = key if guardsDictionary[key][0] == highestSleepTime else guardId
-	#print('{0} - {1}'.format(key, guardsDictionary[key][1]))
 
 print('\nGuard Id: {0} - Sleep Time: {1}'.format(guardId, highestSleepTime))
 
@@ -62,7 +61,20 @@ for minute in guardsDictionary[guardId][1]: # For each minute on the GuardId min
 
 print('{0} * {1} = {2}'.format(guardId, mostFrequentMinute, guardId * mostFrequentMinute))
 
+# Get the Guard with the most frequent minute asleep
+guardId = 0
+mostFrequentMinute = 0
+minuteFrequency = 0
+for guard in guardsDictionary:
 
+	for minute in guardsDictionary[guard][1]: # For each minute on the GuardId minute Dictionary...
+		# ...get the most frequent minute asleep
+		if guardsDictionary[guard][1][minute] > minuteFrequency:
+			guardId = guard
+			minuteFrequency = guardsDictionary[guard][1][minute]
+			mostFrequentMinute = minute
 
+print('\nGuard Id: {0}'.format(guardId))
+print('{0} * {1} = {2}'.format(guardId, mostFrequentMinute, guardId * mostFrequentMinute))
 
 print('\n')
