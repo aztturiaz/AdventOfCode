@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<ProfilingTarget xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <ProjectTarget>
+    <TargetProject>c46cdf3f-e008-47b6-a8cb-3c6d400d9533</TargetProject>
+    <FriendlyName>Day5</FriendlyName>
+  </ProjectTarget>
+  <Reports>
+    <Report>
+      <Filename>C:\Users\jorgeg\AppData\Local\Temp\Day5_20190102.vsp</Filename>
+    </Report>
+  </Reports>
+</ProfilingTarget>
